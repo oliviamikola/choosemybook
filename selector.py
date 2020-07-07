@@ -1,6 +1,6 @@
 import random
 from typing import Optional, Dict
-from book import Book
+from Objects.book import Book
 
 
 class Selector:

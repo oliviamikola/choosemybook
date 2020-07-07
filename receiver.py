@@ -2,8 +2,8 @@ import requests
 import time
 import xmltodict
 from typing import Dict
-from book import Book
-from user import User
+from Objects.book import Book
+from Objects.user import User
 from exceptions import *
 
 

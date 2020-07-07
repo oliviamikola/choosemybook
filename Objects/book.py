@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from author import Author
+from Objects.author import Author
 
 
 class Book:
