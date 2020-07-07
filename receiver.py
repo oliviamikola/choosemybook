@@ -4,7 +4,8 @@ import xmltodict
 from typing import Dict
 from Objects.book import Book
 from Objects.user import User
-from exceptions import *
+from Exceptions.apiConnectionError import ApiConnectionError
+from Exceptions.AuthorizationError import AuthorizationError
 
 
 class Receiver:
@@ -81,7 +82,7 @@ class Receiver:
             if request.status_code == 200:
                 return request.text
             if request.status_code == 401:
-                raise AuthorizationException("Not authorized to access goodreads data")
+                raise AuthorizationError("Not authorized to access goodreads data")
             self.__keep_time()
         else:
             raise ApiConnectionError("Unable to connect to goodreads API")
