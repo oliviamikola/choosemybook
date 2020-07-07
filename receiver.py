@@ -5,7 +5,7 @@ from typing import Dict
 from Objects.book import Book
 from Objects.user import User
 from Exceptions.apiConnectionError import ApiConnectionError
-from Exceptions.AuthorizationError import AuthorizationError
+from Exceptions.authorizationError import AuthorizationError
 
 
 class Receiver:
@@ -15,8 +15,8 @@ class Receiver:
         Initializes important user data to collect book data
         :param user: The user whose data is being collected
         """
-        self.user = user
-        self.last_checked_time = time.time()
+        self._user = user
+        self._last_checked_time = time.time()
 
     def collect_books(self, shelf: str = "to-read") -> Dict[str, Book]:
         """
@@ -25,7 +25,7 @@ class Receiver:
         :return: dictionary containing books from shelf
         """
         url = "https://www.goodreads.com/review/list"
-        params = {**{"v": 2, "shelf": shelf, "page": 1, "per_page": 200}, **(self.user.set_user_params())}
+        params = {**{"v": 2, "shelf": shelf, "page": 1, "per_page": 200}, **(self._user.set_user_params())}
 
         self.__update_time()
 
@@ -57,7 +57,7 @@ class Receiver:
         Ensures goodreads API usage rules are followed
         :return: None
         """
-        while time.time() - self.last_checked_time < 1.0:
+        while time.time() - self._last_checked_time < 1.0:
             pass
         self.__update_time()
 
@@ -66,7 +66,7 @@ class Receiver:
         Updates the last checked time
         :return: None
         """
-        self.last_checked_time = time.time()
+        self._last_checked_time = time.time()
 
     def __retry(self, url: str, params: Dict[str, object]) -> str:
         """
@@ -100,4 +100,4 @@ class Receiver:
         for book_data in dict_data:
             book_data = book_data["book"]
             book = Book(book_data)
-            books_on_shelf[book.book_id] = book
+            books_on_shelf[book.get_id()] = book

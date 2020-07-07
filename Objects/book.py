@@ -9,18 +9,25 @@ class Book:
         Initializes an instance of a book
         :param book_data: ordered dictionary of book data received from goodreads
         """
-        self.book_id = book_data["id"]["#text"]
-        self.title = book_data["title"]
-        self.title_without_series = book_data["title_without_series"]
-        self.author = Author(book_data["authors"]["author"])
-        self.goodreads_link = book_data["link"]
-        self.pages = book_data["num_pages"]
-        self.description = book_data["description"]
-        self.isbn = book_data["isbn"]
+        self._book_id = book_data["id"]["#text"]
+        self._title = book_data["title"]
+        self._title_without_series = book_data["title_without_series"]
+        self._author = Author(book_data["authors"]["author"])
+        self._goodreads_link = book_data["link"]
+        self._pages = book_data["num_pages"]
+        self._description = book_data["description"]
+        self._isbn = book_data["isbn"]
 
     def __str__(self) -> str:
         """
         Formats the book object
         :return: string with Book data
         """
-        return "{} (ID: {}) \nBy: {}".format(self.title, self.book_id, self.author)
+        return "{} (ID: {}) \nBy: {}".format(self._title, self._book_id, self._author)
+
+    def get_id(self) -> str:
+        """
+        Gets the ID of the given book
+        :return: ID of book
+        """
+        return self._book_id

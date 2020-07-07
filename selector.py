@@ -10,19 +10,19 @@ class Selector:
         Initializes the selector
         :param book_dict: dictionary of books gathered from receiver
         """
-        self.book_dict = book_dict
-        self.number = len(self.book_dict)
+        self._book_dict = book_dict
+        self._number = len(self._book_dict)
 
     def select_book(self) -> Optional[Book]:
         """
         Randomly selects a book from book_dict
         :return: the selected book
         """
-        if self.number == 0:
+        if self._number == 0:
             return None
 
-        book_ids = list(self.book_dict.keys())
+        book_ids = list(self._book_dict.keys())
         random.shuffle(book_ids)
         book_id = book_ids[0]
-        book = self.book_dict[book_id]
+        book = self._book_dict[book_id]
         return book

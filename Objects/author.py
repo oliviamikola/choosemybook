@@ -8,15 +8,15 @@ class Author:
         Initializes an instance of an author
         :param author_data: ordered dictionary of author data from goodreads
         """
-        self.author_id = author_data["id"]
-        self.name = author_data["name"]
-        self.goodreads_link = author_data["link"]
-        self.rating = author_data["average_rating"]
-        self.ratings_count = author_data["ratings_count"]
+        self._author_id = author_data["id"]
+        self._name = author_data["name"]
+        self._goodreads_link = author_data["link"]
+        self._rating = author_data["average_rating"]
+        self._ratings_count = author_data["ratings_count"]
 
     def __str__(self) -> str:
         """
         Formats the author object
         :return: string with Author data
         """
-        return "{} (ID: {})".format(self.name, self.author_id)
+        return "{} (ID: {})".format(self._name, self._author_id)
