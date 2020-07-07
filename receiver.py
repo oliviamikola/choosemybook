@@ -4,6 +4,7 @@ import xmltodict
 from typing import Dict
 from book import Book
 from user import User
+from exceptions import *
 
 
 class Receiver:
@@ -79,9 +80,11 @@ class Receiver:
             request = requests.get(url, params=params)
             if request.status_code == 200:
                 return request.text
+            if request.status_code == 401:
+                raise AuthorizationException("Not authorized to access goodreads data")
             self.__keep_time()
         else:
-            raise ValueError  # TODO: Make custom error
+            raise ApiConnectionError("Unable to connect to goodreads API")
 
     def __translate_data(self, goodreads_data: str, books_on_shelf: Dict[str, Book]) -> None:
         """
