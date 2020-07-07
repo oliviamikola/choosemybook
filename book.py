@@ -18,7 +18,7 @@ class Book:
         self.description = book_data["description"]
         self.isbn = book_data["isbn"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Formats the book object
         :return: string with Book data

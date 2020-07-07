@@ -14,7 +14,7 @@ class Author:
         self.rating = author_data["average_rating"]
         self.ratings_count = author_data["ratings_count"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Formats the author object
         :return: string with Author data
