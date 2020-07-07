@@ -1,6 +1,7 @@
 import requests
 import time
 import xmltodict
+from book import Book
 
 
 class Receiver:
@@ -43,9 +44,9 @@ class Receiver:
 
             # Get the essential data about the book and put it into a dictionary
             for book in this_get_books:
-                book = book["book"]
-                book_id = book["id"]["#text"]  # goodreads already has unique keys for each book
-                books_on_shelf[book_id] = book  # Note: book_id is kept as a string
+                book_data = book["book"]
+                book_id = book_data["id"]["#text"]  # goodreads already has unique keys for each book
+                books_on_shelf[book_id] = Book(book_data)  # Note: book_id is kept as a string
 
             # We have all the books
             if total_books == last_book_in_list:
